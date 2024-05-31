@@ -1,4 +1,4 @@
-# SDDG
+# UDA-BUA
 
 This is the repository that contains source code for the project page of [UDA-BUA](https://tonyckc.github.io/UDA-BUA/).
 
