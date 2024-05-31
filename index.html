@@ -67,16 +67,22 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Domain Generalization with Small Data<br>
+          <h1 class="title is-1 publication-title">Unsupervised Domain Adaptation for Low-dose CT Reconstruction via Bayesian Uncertainty Alignment<br>
             <small>
-              <span style="font-size: 60%;">International Journal of Computer Vision (IJCV) 2024</span>
+              <span style="font-size: 60%;">IEEE Transactions on Neural Networks and Learning Systems (TNNLS) 2024</span>
             </small>
           </h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://tonyckc.github.io/">Kecheng Chen</a><sup>1</sup>,</span>
             <span class="author-block">
-              <a href="https://eng.ox.ac.uk/people/elena-gal/">Elena Gal</a><sup>2</sup>,</span>
+              <a href="https://eng.ox.ac.uk/people/elena-gal/">Jie Liu</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://eng.ox.ac.uk/people/elena-gal/">Renjie Wan</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://eng.ox.ac.uk/people/elena-gal/">Victor Lee</a><sup>3</sup>,</span>
+            <span class="author-block">
+              <a href="https://eng.ox.ac.uk/people/elena-gal/">Varut Vardhanabhuti</a><sup>4</sup>,</span>
             <span class="author-block">
               <a href="https://www.ee.cityu.edu.hk/~hpyan/">Hong Yan</a><sup>1</sup>,</span>
             <span class="author-block">
@@ -86,14 +92,16 @@
 
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup> Department of Electrical Engineering, City University of  Hong Kong</span><br>
-            <span class="author-block"><sup>2</sup> Department of Mathematics,  University of Oxford</span><br>
+            <span class="author-block"><sup>2</sup> Department of Computer Science, Hong Kong Baptist University</span><br>
+            <span class="author-block"><sup>2</sup> Department of Clinical Oncology, LKS Faculty of Medicine, The University of Hong Kong</span><br>
+            <span class="author-block"><sup>2</sup> Department of Diagnostic Radiology, LKS Faculty of Medicine, The University of Hong Kong</span><br>
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org/pdf/2402.06150.pdf"
+                <a href="https://arxiv.org/abs/2302.13251"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -105,7 +113,7 @@
               <!-- Code Link. -->
               <span class="tooltip">
               <span class="link-block">
-                <a href="https://github.com/tonyckc/SDDG-code/"
+                <a href="https://github.com/tonyckc/UDA-BUA-code/"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -140,16 +148,31 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            In this work, we propose to tackle the problem of domain generalization in the context of insufficient  samples. Instead of extracting latent feature embeddings based on deterministic models, we propose to
-learn a domain-invariant representation based on the probabilistic framework by mapping each data point into probabilistic embeddings. Specifically, we first extend empirical maximum mean discrepancy
-(MMD) to a novel probabilistic MMD that can measure the discrepancy between mixture distributions
-(i.e., source domains) consisting of a series of latent distributions rather than latent points. Moreover,
-instead of imposing the contrastive semantic alignment (CSA) loss based on pairs of latent points,
-a novel probabilistic CSA loss encourages positive probabilistic embedding pairs to be closer while
-pulling other negative ones apart. Benefiting from the learned representation captured by probabilistic
-models, our proposed method can marriage the measurement on the distribution over distributions
-(i.e., the global perspective alignment) and the distribution-based contrastive semantic alignment
-(i.e., the local perspective alignment)
+            Low-dose computed tomography (LDCT) image reconstruction techniques can reduce patient radiation exposure
+while maintaining acceptable imaging quality. Deep learning is
+widely used in this problem, but the performance of testing data
+(a.k.a. target domain) is often degraded in clinical scenarios due
+to the variations that were not encountered in training data
+(a.k.a. source domain). Unsupervised domain adaptation (UDA)
+of LDCT reconstruction has been proposed to solve this problem
+through distribution alignment. However, existing UDA methods
+fail to explore the usage of uncertainty quantification, which is
+crucial for reliable intelligent medical systems in clinical scenarios
+with unexpected variations. Moreover, existing direct alignment
+for different patients would lead to content mismatch issues. To
+address these issues, we propose to leverage a probabilistic reconstruction framework to conduct a joint discrepancy minimization
+between source and target domains in both the latent and image
+spaces. In the latent space, we devise a Bayesian uncertainty
+alignment to reduce the epistemic gap between the two domains.
+This approach reduces the uncertainty level of target domain
+data, making it more likely to render well-reconstructed results
+on target domains. In the image space, we propose a sharpnessa-ware distribution alignment to achieve a match of second-order
+information, which can ensure that the reconstructed images
+from the target domain have similar sharpness to normal-dose
+CT images from the source domain. Experimental results on
+two simulated datasets and one clinical low-dose imaging dataset
+show that our proposed method outperforms other methods in
+quantitative and visualized performance.
           </p>
         </div>
       </div>
@@ -169,8 +192,7 @@ models, our proposed method can marriage the measurement on the distribution ove
                   <img src="assets/fig2.PNG" alt="Figure 1"  width="100%"/>
                 </div>
                 <div class="content has-text-justified">
-                  <p> A visualized computational process for probabilistic MMD (P-MMD) on two source domains. The same color for
-samples in different domains denote the same label. </p>
+                  <p> Main framework </p>
                 </div>
             </div>
           </div>
@@ -188,12 +210,12 @@ samples in different domains denote the same label. </p>
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{kecheng2024ijcv,
-  title={Domain Generalization with Small Data},
-  author={Kecheng Chen, Elena Gal, Hong Yan, and Haoliang Li},
-  journal={International Journal of Computer Vision},
+    <pre><code>@article{kecheng2024tnnls,
+  title={Unsupervised Domain Adaptation for Low-dose CT Reconstruction via Bayesian Uncertainty Alignment},
+  author={Chen, Kecheng; Liu, Jie; Wan, Renjie; Lee, Victor; Vardhanabhuti, Varut; Yan, Hong; Li, Haoliang},
+  journal={IEEE Transactions on Neural Networks and Learning Systems},
   year={2024},
-  publisher={Springer}
+  publisher={IEEE}
 }</code></pre>
   </div>
 </section>
@@ -220,7 +242,7 @@ samples in different domains denote the same label. </p>
           </p>
           <p>
             This means you are free to borrow the <a
-              href="https://github.com/tonyckc/SDDG">source code</a> of this website,
+              href="https://github.com/tonyckc/UDA-BUA">source code</a> of this website,
             we just ask that you link back to this page in the footer. Some of the source code of this 
             website is borrowed from <a href="https://nerfies.github.io">nerfies</a> and <a href="https://dorverbin.github.io/refnerf/">Ref-NeRF</a>.
           </p>
